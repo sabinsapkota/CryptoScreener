@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    body{
+        background-color: black;
+        color: white;
+        margin:0px;
+        padding:0px;
+        font-size: 10px;
+        
+    }
+    a{
+        text-decoration: none;
+        color: white;
+        
+    }
+       #customers {
+        margin:0px;
+    background-color: black;    
+    color:white;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border-top: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+
+#customers tr:hover {background-color: #1e1e1e;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+        .trends{
+            display:flex;
+            justify-content:space-evenly;
+        }
+        .trends > div >p{
+            border-bottom : 1 px solid black;
+        }
+        #timer{
+            margin-top:5px;
+            width:20px;
+        }
+
+    </style>
+<script>
+    document.addEventListener("DOMContentLoaded",()=>{
+        var table = document.getElementById("customers");
+        for (var i = 1, row; row = table.rows[i]; i++) {
+        //iterate through rows
+         //rows would be accessed using the "row" variable assigned in the for loop
+         for (var j = 1, col; col = row.cells[j]; j++) {
+         //iterate through columns
+         //columns would be accessed using the "col" variable assigned in the for loop
+     
+        if (j==1){
+            ref = col.innerHTML;
+        }
+        else if (j>1 && j<14) {
+            res = col.innerHTML;
+            if(res>ref){
+                change = (res-ref)/ref*100;
+                
+                ref = col.innerHTML;
+                col.innerHTML = "+"+ change.toFixed(2)+"%";
+                if (change>1){
+                    col.style.color = "#57f25f";
+                    col.style.fontWeight = "bold";
+                    col.style.fontSize = "14px";
+                }
+                else{
+                    col.style.color = " #00b300";
+                   
+                }
+            }
+            else{
+                col.style.color = " #ff6666";
+                change = (ref-res)/ref*100;
+                console.log(change);
+                ref = col.innerHTML;
+                col.innerHTML = "-"+change.toFixed(2)+"%";
+                if (change>1){
+                    
+                    col.style.color = "#FF3131";
+                    col.style.fontWeight = "bold";
+                    col.style.fontSize = "14px";
+
+                }
+            }
+         }
+         else{
+
+         }
+         }  
+}
+
+    });
+</script>
+
+</head>
+<body>
+    
+   
+    <table id="customers">
+        <tr>
+            <td >Symbol</td>
+            <td>15 MIN</td>
+            <td>15 MIN</td>
+            <td>15 MIN</td>
+            <td>15 MIN</td>
+            <td>15 MIN</td>
+            <td>15 MIN</td>
+            <td>15 MIN</td>
+            <td>15 MIN</td>
+            <td>15 MIN</td>
+            <td>15 MIN</td>
+            <td>15 MIN</td>
+            <td>15 MIN</td>
+            <td>15 MIN</td>
+        </tr>
+
+        
+        {% for crypto in cryptos %}
+        <tr>
+            <td st><a style="color:#2962ff;font-weight:bold;font-family: -apple-system,BlinkMacSystemFont,Trebuchet MS,Roboto,Ubuntu,sans-serif;font-size: 12px;" href="https://www.tradingview.com/chart/ausoYVoC/?symbol=BINANCE%3A{{crypto.symbol}}"  target="_blank">{{ crypto.symbol }}</a></td>
+            <td class ="price1">{{ crypto.price1 }}</td>
+            <td class ="price2">{{ crypto.price2 }}</td>
+            <td class ="price3">{{ crypto.price3 }}</td>
+            <td class ="price4">{{ crypto.price4 }}</td>
+            <td class ="price5">{{ crypto.price5 }}</td>
+            <td class ="price6">{{ crypto.price6 }}</td>
+            <td class ="price3">{{ crypto.price7 }}</td>
+            <td class ="price4">{{ crypto.price8 }}</td>
+            <td class ="price5">{{ crypto.price9 }}</td>
+            <td class ="price6">{{ crypto.price10 }}</td>
+            <td class ="price4">{{ crypto.price11 }}</td>
+            <td class ="price5">{{ crypto.price12 }}</td>
+            <td class ="price6">{{ crypto.price13 }}</td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+   
+    
+</body>
+</html>
